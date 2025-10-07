@@ -1,19 +1,16 @@
 
 /*Estilos generales */
+/* Reseteo básico para eliminar margenes y paddings por defecto */
 
-{
+*{
  margin: 0;
  padding: 0;
  box-sizing: border-box; 
 }
 
 body { 
-  font-family: sans-serif;
+  font-family: sans-serif; /*Define una tipografía legible */
   color: #333;
-  /* width: 100%; 
-  margin: 0px; 
-  font-size: 30px; */
-
   background-color: #f4f4f4;
   line-height: 1.6; /*Espacio entre lineas */
 
@@ -23,7 +20,7 @@ header, nav, main, footer {
   width: 90%;
   max-width:1200px;
   margin: 20px auto; /*Centra los bloques de la página */
-
+  padding: 20px ;
 }
 
 header {
@@ -53,9 +50,64 @@ nav a:hover{
 
 }
 
-
-
-p {
-   font-size: 30px;
-   color: #c1370d; 
+main section{
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20 px;
+  border-radius: 8px;
 }
+
+h2{
+  margin-bottom: 15px;
+  color: #5a3a22;
+}
+
+.contenido-flexible{
+  display: flex; /*Activa flexbox para el contenedor de la sección principal y el aside */
+  gap: 20px; /*Espacio entre columnas */
+}
+
+.seccion-principal{
+
+  flex: 2; /*La sección principal ocupará el doble de espacio que aside */
+}
+
+aside{
+  flex: 1; /*El aside ocupará una parte del espacio */
+  background-color: #e3d9ca;
+  padding: 20 px;
+  border-radius: 8px;
+
+}
+
+/* article (productos del menú) */
+.producto{
+  display: flex; 
+  align-items: center; /*Alinea verticalmente la imagen y la info del producto */ 
+  gap: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.producto img{
+  max-width: 100px ; /*Limita el ancho de la imagen */
+  height: auto; /*Mantiene la proporcion de la imagen */
+  border-radius: 8px ;
+
+}
+
+.producto-info.precio{
+  font-weight: bold;
+  color: #008000;  
+
+}
+
+footer{
+  text-align: center;
+  border-top: 1px solid #ccc;
+  padding-top: 20 px;
+  font-size:0.9em;
+
+}
+
