@@ -10,42 +10,23 @@
     <meta name="keywords" content="café, granos de café, café mólido, expresso">
     <link rel="stylesheet" href="estilo1.css">
     <link rel="icon" href="taza-de-cafe.png" type="image/png" sizes="16x16">
-     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  </head>
-  <body>
-    <h1 class="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  </body>
-</html>
-02
-Try adding some custom CSS
-Use type="text/tailwindcss" to add custom CSS that supports all of Tailwind's CSS features.
+    
+    <!-- 1. Inclusión de la Hoja de Estilos CSS de Bootstrap (v5.3.8) -->
+    <!-- Bootstrap es una librería que permite construir sitios rápidos y responsivos -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-index.html
-
-<!doctype html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style type="text/tailwindcss">
-      @theme {
-        --color-clifford: #da373d;
-      }
-
-
+    <!-- 2. Estilos CSS3 Personalizados -->
+    <style>
+        /* Definición de colores base inspirados en el café */
+        .bg-cafe {
+            background-color: #4b3621; /* Tono marrón oscuro */
+        }
+        .text-grano {
+            color: #e6c1a8; /* Tono beige claro/arena */
+        }
     </style>
+  
   </head>
-  <body>
-    <h1 class="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  </body>
-</html>
-
-  </head> 
   <body> 
     <header>
           <h1>"El grano dorado"</h1>
@@ -84,9 +65,6 @@ index.html
 
     <!-- 3. Inclusión de los Scripts de Bootstrap (Necesario para la funcionalidad responsiva de colapso) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-
-    
-
 
     <main>
 
