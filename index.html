@@ -53,7 +53,7 @@
                         <a class="nav-link text-grano" href="valores.html">Nuestros valores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-grano fw-bold" href="menu.html">Menú en línea</a>
+                        <a class="nav-link text-grano" href="menu.html">Menú en línea</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-grano" href="catalogo.html">Catálogo</a>
@@ -79,7 +79,6 @@
             dedicación y amor por el café</p>
         </article>
       </section>
-
       <div class="contenido-flexible">
         <section id="menu" class="seccion-principal">
           <h2>Menú para llevar</h2>
@@ -90,7 +89,22 @@
             <h3>Café americano</h3>
             <p>Intenso y aromático, perfecto para iniciar el dia con energía</p>
             <p class="precio">$20.00</p>
+            <button class="btn btn-primary" onclick="cargarFormulario()">Ordenar</button>
           </div>
+        </article>
+
+        <script>
+        function cargarFormulario() {
+        fetch('pedido.html')
+            .then(response => response.text())
+            .then(data => {
+            document.getElementById('menu').innerHTML = data;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        </script>
+        
+        </div>
         </article>
         <article class="producto">
           <img src="img/capuchino.jpg" alt="Café capuchino">

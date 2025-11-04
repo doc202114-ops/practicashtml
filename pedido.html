@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pedido - El grano dorado</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="estilo1.css">
+    <style>
+      .bg-cafe { background-color: #4b3621; }
+      .text-grano { color: #e6c1a8; }
+      .card { border-radius: .6rem; }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-cafe">
+      <div class="container-fluid">
+        <a class="navbar-brand text-grano" href="index.html">El grano dorado</a>
+        <button class="btn btn-outline-light" onclick="location.href='index.html'">Volver al menú</button>
+      </div>
+    </nav>
+
+    <main class="container my-4">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card shadow-sm p-4">
+            <h2 class="mb-3">Realizar pedido</h2>
+
+            <form id="pedidoForm" class="needs-validation" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="nombre" required>
+                  <div class="invalid-feedback">Ingrese su nombre.</div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="telefono" class="form-label">Teléfono</label>
+                  <input type="tel" class="form-control" id="telefono" placeholder="+52 55 0000 0000" required>
+                  <div class="invalid-feedback">Ingrese teléfono de contacto.</div>
+                </div>
+
+                <div class="col-12">
+                  <label for="email" class="form-label">Correo electrónico (opcional)</label>
+                  <input type="email" class="form-control" id="email" placeholder="tucorreo@ejemplo.com">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="producto" class="form-label">Producto</label>
+                  <select id="producto" class="form-select" required>
+                    <option value="" selected disabled>Seleccione...</option>
+                    <option value="americano">Café americano</option>
+                    <option value="capuchino">Capuchino</option>
+                    <option value="espresso">Espresso</option>
+                    <option value="latte">Latte</option>
+                  </select>
+                  <div class="invalid-feedback">Seleccione un producto.</div>
+                </div>
+
+                <div class="col-md-3">
+                  <label for="tamano" class="form-label">Tamaño</label>
+                  <select id="tamano" class="form-select" required>
+                    <option value="chico">Chico</option>
+                    <option value="mediano" selected>Mediano</option>
+                    <option value="grande">Grande</option>
+                  </select>
+                </div>
+
+                <div class="col-md-3">
+                  <label for="cantidad" class="form-label">Cantidad</label>
+                  <input type="number" id="cantidad" class="form-control" min="1" value="1" required>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label">Extras</label>
+                  <div class="form-check">
+                    <input class="form-check-input extra" type="checkbox" value="leche" id="extraLeche">
+                    <label class="form-check-label" for="extraLeche">Leche vegetal (+$5)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input extra" type="checkbox" value="sirope" id="extraSirope">
+                    <label class="form-check-label" for="extraSirope">Sirope (+$4)</label>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <label for="instrucciones" class="form-label">Instrucciones (opcional)</label>
+                  <textarea id="instrucciones" class="form-control" rows="2"></textarea>
+                </div>
+
+                <div class="col-md-8">
+                  <label for="direccion" class="form-label">Dirección de entrega (opcional)</label>
+                  <input id="direccion" class="form-control" placeholder="Calle, número, colonia">
+                </div>
+
+                <div class="col-md-4">
+                  <label class="form-label">Método de pago</label>
+                  <select id="pago" class="form-select">
+                    <option value="efectivo" selected>Efectivo</option>
+                    <option value="tarjeta">Tarjeta al recibir</option>
+                  </select>
+                </div>
+
+                <div class="col-12 d-flex justify-content-between align-items-center">
+                  <div>
+                    <strong>Total: $<span id="total">0.00</span></strong>
+                  </div>
+                  <div>
+                    <button type="button" class="btn btn-secondary me-2" onclick="location.href='index.html'">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Confirmar pedido</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <div id="confirmacion" class="mt-4" style="display:none;">
+              <h4>Pedido recibido</h4>
+              <p id="resumen"></p>
+              <button class="btn btn-success" onclick="location.href='index.html'">Volver al inicio</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="text-center py-3">
+      <small>&copy; 2025 El grano dorado</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+      // Precios base por producto (mediano)
+      const precios = {
+        americano: 20,
+        capuchino: 40,
+        espresso: 25,
+        latte: 45
+      };
+      const tamanos = { chico: 0.9, mediano: 1, grande: 1.3 };
+      const extraPrecios = { leche: 5, sirope: 4 };
+
+      const productoEl = document.getElementById('producto');
+      const tamanoEl = document.getElementById('tamano');
+      const cantidadEl = document.getElementById('cantidad');
+      const extrasEls = document.querySelectorAll('.extra');
+      const totalEl = document.getElementById('total');
+
+      function calcularTotal() {
+        const prod = productoEl.value;
+        if (!prod) {
+          totalEl.textContent = '0.00';
+          return;
+        }
+        const base = precios[prod] || 0;
+        const tamFactor = tamanos[tamanoEl.value] || 1;
+        let total = base * tamFactor * Number(cantidadEl.value || 1);
+        extrasEls.forEach(e => {
+          if (e.checked) total += (extraPrecios[e.value] || 0) * Number(cantidadEl.value || 1);
+        });
+        totalEl.textContent = total.toFixed(2);
+      }
+
+      productoEl.addEventListener('change', calcularTotal);
+      tamanoEl.addEventListener('change', calcularTotal);
+      cantidadEl.addEventListener('input', calcularTotal);
+      extrasEls.forEach(e => e.addEventListener('change', calcularTotal));
+
+      // Form validation + mostrar resumen
+      const form = document.getElementById('pedidoForm');
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        if (!form.checkValidity()) {
+          ev.stopPropagation();
+          form.classList.add('was-validated');
+          return;
+        }
+
+        const nombre = document.getElementById('nombre').value.trim();
+        const telefono = document.getElementById('telefono').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const producto = productoEl.value;
+        const tamano = tamanoEl.value;
+        const cantidad = cantidadEl.value;
+        const instrucciones = document.getElementById('instrucciones').value.trim();
+        const direccion = document.getElementById('direccion').value.trim();
+        const pago = document.getElementById('pago').value;
+        const extras = Array.from(extrasEls).filter(e => e.checked).map(e => e.nextElementSibling.textContent);
+
+        const resumen = `
+          <strong>Cliente:</strong> ${nombre} <br>
+          <strong>Teléfono:</strong> ${telefono} <br>
+          ${email ? `<strong>Email:</strong> ${email} <br>` : ''}
+          <strong>Pedido:</strong> ${cantidad} x ${tamano} - ${producto} <br>
+          ${extras.length ? `<strong>Extras:</strong> ${extras.join(', ')} <br>` : ''}
+          ${direccion ? `<strong>Dirección:</strong> ${direccion} <br>` : ''}
+          ${instrucciones ? `<strong>Instrucciones:</strong> ${instrucciones} <br>` : ''}
+          <strong>Pago:</strong> ${pago} <br>
+          <strong>Total:</strong> $${totalEl.textContent}
+        `;
+
+        document.getElementById('resumen').innerHTML = resumen;
+        form.style.display = 'none';
+        document.getElementById('confirmacion').style.display = 'block';
+
+        // Opcional: guardar pedido en localStorage para pruebas
+        const pedidoObjeto = {
+          nombre, telefono, email, producto, tamano, cantidad, extras, instrucciones, direccion, pago, total: totalEl.textContent, fecha: new Date().toISOString()
+        };
+        const pedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');
+        pedidos.push(pedidoObjeto);
+        localStorage.setItem('pedidos', JSON.stringify(pedidos));
+      });
+
+      // calcular total inicial
+      calcularTotal();
+    </script>
+  </body>
+</html>
